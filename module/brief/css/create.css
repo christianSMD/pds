@@ -1,0 +1,7 @@
+.sub-form tr, .printQty {
+    display: none
+}
+
+#subHeader {
+    display: none;
+}

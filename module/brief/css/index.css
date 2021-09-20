@@ -1,0 +1,7 @@
+.icon-brief-done:before {
+    content: "\e92f";   
+}
+
+.icon-download:before {
+    content: "\e904";
+}

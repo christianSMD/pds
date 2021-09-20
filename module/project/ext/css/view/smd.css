@@ -1,0 +1,16 @@
+.icon-project-closeall:before {
+    content: "\e902";
+}
+
+.icon-project-done:before {
+    content: "\e92f";
+}
+
+.panel.block-docs {
+    height: auto !important;
+
+}
+
+.file-input-list {
+    float: left;
+}

@@ -1,0 +1,26 @@
+.content {
+    display: none;
+}
+
+.packagingNew .content.packagingNew,
+.packagingUpdate .content.packagingUpdate,
+.packagingRedesign .content.packagingRedesign,
+.packagingConcept .content.packagingConcept,
+.productDevelopment .content.productDevelopment,
+.productPhotography .content.productPhotography,
+.promotionalGraphics .content.promotionalGraphics,
+.corporate .content.corporate,
+.createNewProduct .content.createNewProduct,
+.modifyProduct .content.modifyProduct,
+.newConcept .content.newConcept
+{
+    display: table-row;
+}
+
+.accepted {
+    
+}
+
+.icon-brief-done:before {
+    content: "\e92f";   
+}

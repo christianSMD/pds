@@ -1,0 +1,68 @@
+/* 
+    Created on : 22 Oct 2018, 1:41:04 PM
+    Author     : Rory
+*/
+
+.block-flowchart,
+#block7,
+#block8,
+#block9,
+.block-welcome .timeline,
+.hide,
+.block-bug,
+#searchbox,
+#extraNav .dropdown,
+.m-project-task #sidebarHeader,
+.m-project-task #sidebar {
+    display: none
+}
+
+.accepted {
+    color: #00b791
+}
+
+.declined {
+    color: #e62340
+}
+
+.reverted {
+    color: #e6dc23
+}
+
+.pager.form-inline div {
+    display: inline-block;
+}
+
+.icon-flip-horizontal {
+    display: inline-block !important;
+}
+
+#productSearch, #briefSearch {
+    max-width: 70%;
+}
+
+.table-form>tbody>tr>td.data-tooltip {
+    max-width: 400px;
+    vertical-align: text-top;
+}
+
+.fab td {
+    border-left: 1px solid #ccc
+}
+
+.product-table {
+    border-collapse: separate;
+    border-spacing: 0 1em;
+}
+
+.table-footer.fixed-footer .pager.form-inline a, .table-footer.fixed-footer .pager.form-inline strong, .table-footer.fixed-footer .pager.form-inline {
+    color: #fff;
+}
+
+.sendtoteam .table-form textarea.form-control {
+    height: auto;
+}
+
+body{
+    font-family:Helvetica,Arial,Tahoma,'Microsoft Yahei','PingFang SC','Hiragino Sans GB','WenQuanYi Micro Hei',sans-serif !important;
+}
