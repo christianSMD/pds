@@ -39,14 +39,14 @@ $config->brief->typefields['corporate']             = array('name', 'onBehalfOf'
 $config->brief->typefields['createNewProduct']      = array('name', 'onBehalfOf', 'deadline', 'timeAllocation', 'type', 'desc', 'functions', 'lookAndFeel', 'products', 'links', 'brand', 'xcaCode', 'techSpec', 'funcSpec', 'size', 'additionalSpec', 'client', 'targetPrice', 'quantity', 'deliveryDate');
 $config->brief->typefields['modifyProduct']         = array('name', 'onBehalfOf', 'deadline', 'timeAllocation', 'dateOrdered', 'type', 'desc', 'products', 'brand', 'techSpec', 'funcSpec', 'size', 'additionalSpec', 'client', 'targetPrice', 'quantity', 'deliveryDate');
 $config->brief->typefields['newConcept']            = array('name', 'onBehalfOf', 'deadline', 'timeAllocation', 'dateOrdered', 'type', 'desc', 'techSpec', 'funcSpec', 'size', 'additionalSpec', 'client', 'targetPrice', 'quantity', 'deliveryDate');
-$config->brief->typeFields['digitalDesign']         = array('name', 'onBehalfOf', 'deadline', 'timeAllocation', 'type', 'desc', 'dimensions', 'orientation');
-$config->brief->typeFields['catalogue']		        = array('name', 'onBehalfOf', 'deadline', 'timeAllocation', 'type', 'desc');
-$config->brief->typeFields['advert']		        = array('name', 'onBehalfOf', 'deadline', 'timeAllocation', 'type', 'desc', 'dimensions', 'orientation');
-$config->brief->typeFields['copySeo']               = array('name', 'onBehalfOf', 'deadline', 'timeAllocation', 'type', 'desc');
-$config->brief->typeFields['copyScript']            = array('name', 'onBehalfOf', 'deadline', 'timeAllocation', 'type', 'desc');
-$config->brief->typeFields['copyContent']           = array('name', 'onBehalfOf', 'deadline', 'timeAllocation', 'type', 'desc');
-$config->brief->typeFields['copyBlog']              = array('name', 'onBehalfOf', 'deadline', 'timeAllocation', 'type', 'desc');
-$config->brief->typeFields['copyAdvertorial']       = array('name', 'onBehalfOf', 'deadline', 'timeAllocation', 'type', 'desc');
+$config->brief->typefields['digitalDesign']         = array('name', 'onBehalfOf', 'deadline', 'timeAllocation', 'type', 'desc', 'dimensions', 'orientation');
+$config->brief->typefields['catalogue']		        = array('name', 'onBehalfOf', 'deadline', 'timeAllocation', 'type', 'desc');
+$config->brief->typefields['advert']		        = array('name', 'onBehalfOf', 'deadline', 'timeAllocation', 'type', 'desc', 'dimensions', 'orientation');
+$config->brief->typefields['copySeo']               = array('name', 'onBehalfOf', 'deadline', 'timeAllocation', 'type', 'desc');
+$config->brief->typefields['copyScript']            = array('name', 'onBehalfOf', 'deadline', 'timeAllocation', 'type', 'desc');
+$config->brief->typefields['copyContent']           = array('name', 'onBehalfOf', 'deadline', 'timeAllocation', 'type', 'desc');
+$config->brief->typefields['copyBlog']              = array('name', 'onBehalfOf', 'deadline', 'timeAllocation', 'type', 'desc');
+$config->brief->typefields['copyAdvertorial']       = array('name', 'onBehalfOf', 'deadline', 'timeAllocation', 'type', 'desc');
 
 // Allowed HTML tags
 $config->brief->cleanFields                         = array('desc', 'functions', 'techSpec', 'funcSpec', 'additionalSpec', 'lookAndFeel');  

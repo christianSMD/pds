@@ -7,6 +7,7 @@ $defaultTheme = $webRoot . 'theme/default/';
 $langTheme    = $themeRoot . 'lang/' . $app->getClientLang() . '.css';
 $clientTheme  = $this->app->getClientTheme();
 $onlybody     = zget($_GET, 'onlybody', 'no');
+$angularRoot  = $webRoot . "angular/";
 ?>
 <!DOCTYPE html>
 <html lang='<?php echo $app->getClientLang();?>'>
@@ -37,7 +38,11 @@ $onlybody     = zget($_GET, 'onlybody', 'no');
       js::import($jsRoot . 'all.js');
       css::import($defaultTheme . $this->cookie->lang . '.' . $this->cookie->theme . '.css');
   }
-  
+
+  // Adding Angular to Zentao
+  js::import($angularRoot . 'angularjs.js');
+  js::import($angularRoot . 'app.js');
+
   css::import('/theme/custom.css');
 
   if(!defined('IN_INSTALL') and commonModel::isTutorialMode())
@@ -57,4 +62,4 @@ $onlybody     = zget($_GET, 'onlybody', 'no');
 <?php js::import($jsRoot . 'jquery/placeholder/min.js'); ?>
 <![endif]-->
 </head>
-<body>
+<body ng-app="app">

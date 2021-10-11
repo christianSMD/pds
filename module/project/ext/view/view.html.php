@@ -148,6 +148,49 @@
             </div>
           </div>
         </div>
+
+        <!-- added Notes Section -->
+        <div class="col-sm-12">
+          <div class="panel" ng-controller="getNotesCtrl">
+            <div class="panel-heading">
+              <div class="panel-title">
+                <div class="detail-title">
+                    Notes 
+                    <small class="text-muted">(
+                      <span  ng-if="rows < 1">0 notes available</span>
+                      <span  ng-if="rows > 1">{{rows}} notes</span>)
+                    </small>
+                    <button ng-click="newNoteSection()" class="btn btn-sm pull-right">
+                      Add Notes
+                    </button>
+                </div>
+              </div>
+            </div>
+            <div class="panel-body">
+              <div class="detail-content" ng-init="loadNotes('<?php echo $project->id;?>')">
+
+                <div class="row">
+                    <div ng-class="notesClass">
+                      <ul ng-if="rows > 0" class="timeline timeline-tag-left">
+                        <li ng-repeat="n in notes" class="active">
+                          <div class='text-ellipsis' style="margin-right: 2rem !important;">
+                            <span class="timeline-tag">{{n.created | date:'MM/dd/yy'}}</span>
+                            <span class="timeline-text">
+                              <textarea class="form-control">{{n.text}}</textarea>
+                            </span>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                    <div ng-class="addNoteClasss">
+                    </div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="col-sm-12">
           <?php $blockHistory = true;?>
           <?php include '../../../common/view/action.html.php';?>

@@ -10,3 +10,8 @@
 @-moz-document url-prefix() {.main-table tbody > tr.table-children > td:first-child::before {width: 4px;}}
 
 .m-traffic-index .table-children { display: none }
+
+.smd-notes {
+    border: 2px solid rgb(238, 238, 238);
+    border-radius: 3px;
+}

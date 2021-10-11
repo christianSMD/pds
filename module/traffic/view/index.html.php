@@ -28,7 +28,7 @@
     <?php // common::printLink('project', 'create', '', "<i class='icon-plus'></i> " . $lang->project->create, '', "class='btn btn-primary'")?>
   </div>
 </div>
-<div id='mainContent'>
+<div id='mainContent' ng-controller="notesCtrl">
   <?php $canOrder = false; // (common::hasPriv('project', 'updateOrder') and strpos($orderBy, 'order') !== false) ?>
   <form class='main-table' id='projectsForm' method='post' action='<?php echo inLink('batchEdit', "projectID=$projectID");?>' data-ride='table'>
     <table class='table has-sort-head table-fixed' id='projectList'>
@@ -41,14 +41,16 @@
             </div>
             <?php common::printOrderLink('id', $orderBy, $vars, $lang->idAB);?>
           </th>
-          <th><?php common::printOrderLink('name', $orderBy, $vars, $this->lang->traffic->name);?></th>
+          <th class="w-200px"><?php common::printOrderLink('name', $orderBy, $vars, $this->lang->traffic->name);?></th>
           <th class="w-90px"><?php echo $lang->traffic->assignedTo ?></th>
+          <th class="w-90px">For</th>
           <!-- <th class='w-100px'><?php common::printOrderLink('code', $orderBy, $vars, $lang->traffic->code);?></th> -->
           <!-- <th class='w-100px'><?php common::printOrderLink('PM', $orderBy, $vars, $lang->traffic->PM);?></th> -->
           <th class='w-90px'><?php common::printOrderLink('end', $orderBy, $vars, $lang->traffic->end);?></th>
           <th class='w-90px'><?php common::printOrderLink('status', $orderBy, $vars, $lang->traffic->status);?></th>
+          <th class='w-200px'>Notes</th>
           <th class='w-70px'><?php echo $lang->traffic->totalEstimate;?></th>
-          <th class='w-70px'><?php echo $lang->traffic->totalConsumed;?></th>
+          <!-- <th class='w-70px'><?php echo $lang->traffic->totalConsumed;?></th> -->
           <th class='w-70px'><?php echo $lang->traffic->totalLeft;?></th>
           <th class='w-150px'><?php echo $lang->traffic->progress;?></th>
           <?php if(common::hasPriv('brief', 'done')): ?>
@@ -96,6 +98,19 @@
               endif;
               ?>
           </td>
+          <td>
+              <?php
+              if(!empty($project->tasks)): 
+                  foreach($project->tasks as $task):
+                    $user = $this->loadModel('user')->getById($task->openedBy);
+                    if($user != false) {
+                        echo $user->realname;
+                        break;
+                    }
+                  endforeach;
+              endif;
+              ?>
+          </td>
           <!-- <td class='text-left'><?php echo $project->code;?></td> -->
           <!-- <td><?php echo $users[$project->PM];?></td> -->
           <td><?php echo $project->end;?></td>
@@ -105,8 +120,14 @@
               <span class='status-text'><?php echo zget($lang->project->statusList, $project->status);?></span>
             </span>
           </td>
+          <td>
+            <textarea ng-model="note<?php echo $project->id;?>" class="smd-notes" rows="2" placeholder="Add new notes"></textarea>
+            <a ng-click="saveNote(note<?php echo $project->id;?>, <?php echo $project->id;?>)">
+               <i class='icon-check text-success'></i>
+            </a>
+          </td>
           <td><?php echo $project->hours->totalEstimate;?></td>
-          <td><?php echo $project->hours->totalConsumed;?></td>
+          <!-- <td><?php echo $project->hours->totalConsumed;?></td> -->
           <td><?php echo $project->hours->totalLeft;?></td>
           <td class="c-progress">
             <div class="progress progress-text-left">
@@ -184,6 +205,9 @@
     <?php endif;?>
   </form>
 </div>
+
 <script>$("#<?php echo $status;?>Tab").addClass('btn-active-text');</script>
+
 <?php js::set('orderBy', $orderBy)?>
 <?php include '../../common/view/footer.html.php';?>
+

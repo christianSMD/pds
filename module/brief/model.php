@@ -402,6 +402,7 @@ class briefModel extends model {
             $whitelist[] = 14;
             
         }
+
                                         
         $brief = fixer::input('post')
                 ->setDefault('status', 'new')
@@ -521,6 +522,7 @@ class briefModel extends model {
     private function cleanFields() {
         // Get the brief type and its corresponding required fields
         $type = filter_input(INPUT_POST, 'type');
+
         $fields = $this->config->brief->typefields[$type];
         // Loop through POST var, removing not-found vars
                 
