@@ -9,10 +9,10 @@
 
   class Database {
     // DB Params
-    private $host = '127.0.0.1:3306';
-    private $db_name = 'smdtecfu_pdszt';
-    private $username = 'smdtecfu_psdztu';
-    private $password = '7{,.K=em/>W=E&\V';
+    private $host = '127.0.0.1:3303';
+    private $db_name = 'pds';
+    private $username = 'root';
+    private $password = '';
     private $conn;
 
     // DB Connect

@@ -20,6 +20,7 @@ if($extHookFiles) foreach($extHookFiles as $extHookFile) include $extHookFile;
       <hrgroup id='heading'>
         <?php $heading = sprintf($lang->welcome, $app->company->name);?>
         <h1 id='companyname' title='<?php echo $heading;?>'<?php if(strlen($heading) > 36) echo " class='long-name'" ?>><?php echo html::a(helper::createLink('index'), $heading);?></h1>
+        <small>DEV</small>
       </hrgroup>
       <nav id='navbar'><?php commonModel::printMainmenu($this->moduleName);?></nav>
       <div id='toolbar'>

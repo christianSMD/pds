@@ -28,7 +28,7 @@
     <?php // common::printLink('project', 'create', '', "<i class='icon-plus'></i> " . $lang->project->create, '', "class='btn btn-primary'")?>
   </div>
 </div>
-<div id='mainContent' ng-controller="notesCtrl">
+<div id='mainContent' ng-app="app" ng-controller="notesCtrl">
   <?php $canOrder = false; // (common::hasPriv('project', 'updateOrder') and strpos($orderBy, 'order') !== false) ?>
   <form class='main-table' id='projectsForm' method='post' action='<?php echo inLink('batchEdit', "projectID=$projectID");?>' data-ride='table'>
     <table class='table has-sort-head table-fixed' id='projectList'>
@@ -41,9 +41,10 @@
             </div>
             <?php common::printOrderLink('id', $orderBy, $vars, $lang->idAB);?>
           </th>
+          <th class="w-50px">Brief ID</th>
           <th class="w-200px"><?php common::printOrderLink('name', $orderBy, $vars, $this->lang->traffic->name);?></th>
           <th class="w-90px"><?php echo $lang->traffic->assignedTo ?></th>
-          <th class="w-90px">For</th>
+          <!-- <th class="w-90px">For</th> -->
           <!-- <th class='w-100px'><?php common::printOrderLink('code', $orderBy, $vars, $lang->traffic->code);?></th> -->
           <!-- <th class='w-100px'><?php common::printOrderLink('PM', $orderBy, $vars, $lang->traffic->PM);?></th> -->
           <th class='w-90px'><?php common::printOrderLink('end', $orderBy, $vars, $lang->traffic->end);?></th>
@@ -74,6 +75,9 @@
             <?php endif;?>
             <?php printf('%03d', $project->id);?>
           </td>
+          <td style="color: green;">
+            <?php echo $project->briefID;?>
+          </td>
           <td class='text-left c-name <?php if(!empty($project->tasks)) echo 'has-child'; ?>' title='<?php echo $project->name?>'>
             <?php
             if(isset($project->delay)) echo "<span class='label label-danger label-badge'>{$lang->traffic->delayed}</span> ";
@@ -98,19 +102,6 @@
               endif;
               ?>
           </td>
-          <td>
-              <?php
-              if(!empty($project->tasks)): 
-                  foreach($project->tasks as $task):
-                    $user = $this->loadModel('user')->getById($task->openedBy);
-                    if($user != false) {
-                        echo $user->realname;
-                        break;
-                    }
-                  endforeach;
-              endif;
-              ?>
-          </td>
           <!-- <td class='text-left'><?php echo $project->code;?></td> -->
           <!-- <td><?php echo $users[$project->PM];?></td> -->
           <td><?php echo $project->end;?></td>
@@ -121,9 +112,10 @@
             </span>
           </td>
           <td>
-            <textarea ng-model="note<?php echo $project->id;?>" class="smd-notes" rows="2" placeholder="Add new notes"></textarea>
+            <textarea ng-model="note<?php echo $project->id;?>" class="smd-notes" rows="2" ng-init="getLastNote(<?php echo $project->id;?>)" id="<?php echo $project->id;?>" placeholder="Add new notes"></textarea>
             <a ng-click="saveNote(note<?php echo $project->id;?>, <?php echo $project->id;?>)">
-               <i class='icon-check text-success'></i>
+               <i ng-show="!loading" class='icon-check text-success'></i>
+               <span ng-show="loading">&#8987;</span>
             </a>
           </td>
           <td><?php echo $project->hours->totalEstimate;?></td>

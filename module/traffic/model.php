@@ -5,7 +5,7 @@ class trafficModel extends model {
         
         if(!$this->loadModel('common')->checkField(TABLE_TASK, $type)) return array();
                 
-        $tasks = $this->dao->select('t1.*, t2.id as projectID, t2.name as projectName, t3.id as storyID, t3.title as storyTitle, t3.status AS storyStatus, t3.version AS latestStoryVersion, t4.type AS jobType')
+        $tasks = $this->dao->select('t1.*, t2.id as projectID, t2.name as projectName, t3.id as storyID, t3.title as storyTitle, t3.status AS storyStatus, t3.version AS latestStoryVersion, t4.type AS jobType, t4.id AS briefID')
             ->from(TABLE_TASK)->alias('t1')
             ->leftjoin(TABLE_PROJECT)->alias('t2')->on('t1.project = t2.id')
             ->leftjoin(TABLE_STORY)->alias('t3')->on('t1.story = t3.id')
@@ -46,7 +46,7 @@ class trafficModel extends model {
         {
             if(!$this->checkPriv($project)) unset($projects[$projectID]);
         }
-        $projects = $this->dao->select('*, t2.id AS id, t2.status AS status')->from(TABLE_PROJECT)->alias('t2')
+        $projects = $this->dao->select('*, t2.id AS id, t2.status AS status, t4.id AS briefID')->from(TABLE_PROJECT)->alias('t2')
             ->leftjoin(TABLE_BRIEFS)->alias('t4')->on('t2.id = t4.projectID')
             ->where('t2.id')->in(array_keys($projects))
             ->andWhere('t4.type')->notIn(array('createNewProduct', 'modifyProduct', 'newConcept'))
@@ -150,7 +150,7 @@ class trafficModel extends model {
 
         if($productID != 0)
         {
-            return $this->dao->select('t2.*, t2.id AS id, t2.status AS status')->from(TABLE_PROJECTPRODUCT)->alias('t1')
+            return $this->dao->select('t2.*, t2.id AS id, t2.status AS status, t4.id AS briefID')->from(TABLE_PROJECTPRODUCT)->alias('t1')
                 ->leftJoin(TABLE_PROJECT)->alias('t2')->on('t1.project = t2.id')
                 ->leftjoin(TABLE_BRIEFS)->alias('t4')->on('t2.id = t4.projectID')
                 ->where('t1.product')->eq($productID)
@@ -167,7 +167,7 @@ class trafficModel extends model {
         }
         else
         {
-            return $this->dao->select('*, t2.id AS id, t2.status AS status, IF(INSTR(" done,closed", t2.status) < 2, 0, 1) AS isDone')->from(TABLE_PROJECT)->alias('t2')
+            return $this->dao->select('*, t2.id AS id, t2.status AS status, IF(INSTR(" done,closed", t2.status) < 2, 0, 1) AS isDone, t4.id AS briefID')->from(TABLE_PROJECT)->alias('t2')
                 ->leftjoin(TABLE_BRIEFS)->alias('t4')->on('t2.id = t4.projectID')
                 ->where('iscat')->eq(0)
                 ->andWhere('t4.type')->notIn(array('createNewProduct', 'modifyProduct', 'newConcept'))

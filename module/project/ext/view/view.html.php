@@ -151,7 +151,7 @@
 
         <!-- added Notes Section -->
         <div class="col-sm-12">
-          <div class="panel" ng-controller="getNotesCtrl">
+          <div class="panel" ng-app="app" ng-controller="getNotesCtrl">
             <div class="panel-heading">
               <div class="panel-title">
                 <div class="detail-title">
@@ -160,9 +160,9 @@
                       <span  ng-if="rows < 1">0 notes available</span>
                       <span  ng-if="rows > 1">{{rows}} notes</span>)
                     </small>
-                    <button ng-click="newNoteSection()" class="btn btn-sm pull-right">
+                    <!-- <button ng-click="newNoteSection()" class="btn btn-sm pull-right">
                       Add Notes
-                    </button>
+                    </button> -->
                 </div>
               </div>
             </div>

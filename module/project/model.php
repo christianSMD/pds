@@ -729,8 +729,9 @@ class projectModel extends model
 
         if($productID != 0)
         {
-            return $this->dao->select('t2.*')->from(TABLE_PROJECTPRODUCT)->alias('t1')
+            return $this->dao->select('t2.*, t4.id AS briefID')->from(TABLE_PROJECTPRODUCT)->alias('t1')
                 ->leftJoin(TABLE_PROJECT)->alias('t2')->on('t1.project = t2.id')
+                ->leftjoin(TABLE_BRIEFS)->alias('t4')->on('t2.id = t4.projectID')
                 ->where('t1.product')->eq($productID)
                 ->andWhere('t2.deleted')->eq(0)
                 ->andWhere('t2.iscat')->eq(0)
@@ -738,18 +739,20 @@ class projectModel extends model
                 ->beginIF($branch)->andWhere('t1.branch')->eq($branch)->fi()
                 ->beginIF($status == 'isdoing')->andWhere('t2.status')->ne('done')->andWhere('t2.status')->ne('suspended')->andWhere('t2.status')->ne('closed')->fi()
                 ->beginIF($status != 'all' and $status != 'isdoing' and $status != 'undone')->andWhere('status')->in($status)->fi()
-                ->orderBy('order_desc')
+                ->orderBy('t2.order_desc')
                 ->beginIF($limit)->limit($limit)->fi()
                 ->fetchAll('id');
         }
         else
         {
-            return $this->dao->select('*, IF(INSTR(" done,closed", status) < 2, 0, 1) AS isDone')->from(TABLE_PROJECT)->where('iscat')->eq(0)
-                ->beginIF($status == 'undone')->andWhere('status')->ne('done')->andWhere('status')->ne('closed')->fi()
-                ->beginIF($status == 'isdoing')->andWhere('status')->ne('done')->andWhere('status')->ne('suspended')->andWhere('status')->ne('closed')->fi()
-                ->beginIF($status != 'all' and $status != 'isdoing' and $status != 'undone')->andWhere('status')->in($status)->fi()
-                ->andWhere('deleted')->eq(0)
-                ->orderBy('order_desc')
+            return $this->dao->select('*, IF(INSTR(" done,closed", t2.status) < 2, 0, 1) AS isDone, t4.id AS briefID')->from(TABLE_PROJECT)->alias('t2')
+            ->leftjoin(TABLE_BRIEFS)->alias('t4')->on('t4.projectID = t2.id')
+            ->where('iscat')->eq(0)
+                ->beginIF($status == 'undone')->andWhere('t2.status')->ne('done')->andWhere('t2.status')->ne('closed')->fi()
+                ->beginIF($status == 'isdoing')->andWhere('t2.status')->ne('done')->andWhere('t2.status')->ne('suspended')->andWhere('t2.status')->ne('closed')->fi()
+                ->beginIF($status != 'all' and $status != 'isdoing' and $status != 'undone')->andWhere('t2.status')->in($status)->fi()
+                ->andWhere('t2.deleted')->eq(0)
+                ->orderBy('t2.order_desc')
                 ->beginIF($limit)->limit($limit)->fi()
                 ->fetchAll('id');
         }
@@ -769,9 +772,10 @@ class projectModel extends model
     {
         if($productID != 0)
         {
-            return $this->dao->select('t2.*')->from(TABLE_PROJECTPRODUCT)->alias('t1')
+            return $this->dao->select('t2.*, t4.id AS briefID')->from(TABLE_PROJECTPRODUCT)->alias('t1')
                 ->leftJoin(TABLE_PROJECT)->alias('t2')->on('t1.project = t2.id')
                 ->leftJoin(TABLE_TEAM)->alias('t3')->on('t3.root=t2.id')
+                ->leftjoin(TABLE_BRIEFS)->alias('t4')->on('t2.id = t4.projectID')
                 ->where('t1.product')->eq($productID)
                 ->andWhere('t2.deleted')->eq(0)
                 ->andWhere('t2.iscat')->eq(0)
@@ -786,8 +790,9 @@ class projectModel extends model
         }
         else
         {
-            return $this->dao->select('t1.*, IF(INSTR(" done,closed", t1.status) < 2, 0, 1) AS isDone')->from(TABLE_PROJECT)->alias('t1')
+            return $this->dao->select('t1.*, IF(INSTR(" done,closed", t1.status) < 2, 0, 1) AS isDone, t4.id AS briefID')->from(TABLE_PROJECT)->alias('t1')
                 ->leftJoin(TABLE_TEAM)->alias('t2')->on('t2.root=t1.id')
+                ->leftjoin(TABLE_BRIEFS)->alias('t4')->on('t1.id = t4.projectID')
                 ->where('t1.iscat')->eq(0)
                 ->andWhere('t1.openedBy', true)->eq($this->app->user->account)
                 ->orWhere('t2.account')->eq($this->app->user->account)

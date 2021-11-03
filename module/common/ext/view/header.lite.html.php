@@ -62,4 +62,4 @@ $angularRoot  = $webRoot . "angular/";
 <?php js::import($jsRoot . 'jquery/placeholder/min.js'); ?>
 <![endif]-->
 </head>
-<body ng-app="app">
+<body>

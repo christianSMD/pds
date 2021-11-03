@@ -41,6 +41,7 @@
             </div>
             <?php common::printOrderLink('id', $orderBy, $vars, $lang->idAB);?>
           </th>
+          <th>briefID</th>
           <th><?php common::printOrderLink('name', $orderBy, $vars, $lang->project->name);?></th>
           <th class='w-100px'><?php common::printOrderLink('code', $orderBy, $vars, $lang->project->code);?></th>
           <th class='w-100px'><?php common::printOrderLink('PM', $orderBy, $vars, $lang->project->PM);?></th>
@@ -69,6 +70,7 @@
             <?php endif;?>
             <?php printf('%03d', $project->id);?>
           </td>
+          <td></td>
           <td class='text-left' title='<?php echo $project->name?>'>
             <?php
             if(isset($project->delay)) echo "<span class='label label-danger label-badge'>{$lang->project->delayed}</span> ";
